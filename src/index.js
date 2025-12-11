@@ -9,11 +9,17 @@ let proxies = await collection.find({}).toArray();
 import { DecodoProvider } from './DecodoProvider.js';
 
 // Configuration
-const CONCURRENT_LIMIT = 50; // Max concurrent fetches
-const SESSION_COUNT = 1000;
-const RETRY_ATTEMPTS = 3;
-const RETRY_DELAY = 1000; // ms
-const LOOP_DELAY = 1000 * 10; // 10 seconds
+const CONCURRENT_LIMIT = process.env.CONCURRENT_LIMIT || 50; // Max concurrent fetches
+const SESSION_COUNT = process.env.SESSION_COUNT || 1000;
+const RETRY_ATTEMPTS = process.env.RETRY_ATTEMPTS || 1;
+const RETRY_DELAY = process.env.RETRY_DELAY || 1000; // ms
+const LOOP_DELAY = process.env.LOOP_DELAY || 1000 * 10; // 10 seconds
+
+console.log(`[+] Concurrent limit: ${CONCURRENT_LIMIT}`);
+console.log(`[+] Session count: ${SESSION_COUNT}`);
+console.log(`[+] Retry attempts: ${RETRY_ATTEMPTS}`);
+console.log(`[+] Retry delay: ${RETRY_DELAY}`);
+console.log(`[+] Loop delay: ${LOOP_DELAY}`);
 
 // Concurrency limiter using semaphore pattern
 class ConcurrencyLimiter {

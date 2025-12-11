@@ -1,0 +1,16 @@
+{
+  "name": "bx-proxy-provider",
+  "module": "src/index.js",
+  "type": "module",
+  "private": true,
+  "devDependencies": {
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  },
+  "dependencies": {
+    "ioredis": "^5.8.2",
+    "mongodb": "^7.0.0"
+  }
+}
